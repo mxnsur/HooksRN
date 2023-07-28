@@ -1,12 +1,13 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import React from 'react';
+import { SafeAreaView } from 'react-native';
 
-const App = () => {
-  return (
-    <View>
-      <Text>App Test</Text>
-    </View>
-  )
+import Home from './src/telas/Home';
+
+
+function App() {
+  return <SafeAreaView>
+    <Home />
+  </SafeAreaView>
 }
 
-export default App
+export default App;
