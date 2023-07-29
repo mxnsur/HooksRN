@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native'
+import { Image, StyleSheet, Touchable, TouchableOpacity, View } from 'react-native'
 
 import estrela from '../assets/estrela.png';
 import estrelaCinza from '../assets/estrelaCinza.png';
 
 export default function Estrelas( {
     quantidade: quantidadeAntiga,
-    editavel = true, 
-    grande = true,
+    editavel = false, 
+    grande = false,
 }) {
     const [ quantidade, setQuantidade ] = useState(quantidadeAntiga);
     const estilos = estilosFuncao(grande);
