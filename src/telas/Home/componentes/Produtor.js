@@ -1,31 +1,41 @@
-import React, { useReducer, useState } from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
-import Estrelas from "../../../componentes/Estrelas";
+import React, { useReducer, useMemo } from 'react';
+import { View, TouchableOpacity, Text, Image, StyleSheet } from 'react-native';
 
-export default function Produtor ({ nome, imagem, distancia, estrelas }) {
+import Estrelas from '../../../componentes/Estrelas';
+
+const distanciaEmMetros = (distancia) => {
+    console.log('distanciaEmMetros');
+    return `${distancia}m`;
+}
+
+export default function Produtor({ nome, imagem, distancia, estrelas }) {
     const [selecionado, inverterSelecionado] = useReducer(
         (selecionado) => !selecionado,
         false
     );
 
+    const distanciaTexto = useMemo(
+        () => distanciaEmMetros(distancia), 
+        [distancia]
+    );
+
     return <TouchableOpacity 
-        style={estilos.cartao}
-        onPress={inverterSelecionado}
-    >
+            style={estilos.cartao}
+            onPress={inverterSelecionado}
+        >
         <Image source={imagem} style={estilos.imagem} accessibilityLabel={nome} />
         <View style={estilos.informacoes}>
             <View>
-                <Text style={estilos.nome}>{ nome } </Text>
+                <Text style={estilos.nome}>{ nome }</Text>
                 <Estrelas 
-                quantidade={estrelas} 
-                editavel={selecionado}
-                grande={selecionado}
+                    quantidade={estrelas}
+                    editavel={selecionado}
+                    grande={selecionado}
                 />
             </View>
-             <Text style={estilos.distancia}>{ distancia } </Text>
-
+            <Text style={estilos.distancia}>{ distanciaTexto }</Text>
         </View>
-        </TouchableOpacity>
+    </TouchableOpacity>
 }
 
 const estilos = StyleSheet.create({
@@ -40,10 +50,10 @@ const estilos = StyleSheet.create({
         elevation: 4,
 
         // iOS
-        shadowColor: '#000000',
+        shadowColor: '#000',
         shadowOffset: {
             width: 0,
-            height:  2,
+            height: 2,
         },
         shadowOpacity: 0.23,
         shadowRadius: 2.62,
@@ -52,7 +62,7 @@ const estilos = StyleSheet.create({
         width: 48,
         height: 48,
         borderRadius: 6,
-        marginVertical: 16, 
+        marginVertical: 16,
         marginLeft: 16,
     },
     informacoes: {
@@ -71,5 +81,5 @@ const estilos = StyleSheet.create({
     distancia: {
         fontSize: 12,
         lineHeight: 19,
-    }
+    },
 });
